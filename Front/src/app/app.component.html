@@ -1,0 +1,63 @@
+
+<div *ngIf="this.inicioSesion" >
+    <div class="grid">
+      <div class="col-3">
+        <img src="../assets/logo.webp" width="150px" alt="">
+      </div>
+      <div class="col-6 text-center" >
+        <p style="font-size: 60px;">ADViajes</p>
+      </div>
+      <div class="col-3">
+        <div>
+          <p>{{this.localUsuario?.nombre}}</p>
+        </div>
+
+        <img src="../assets/Cerrar.png" width="50px" alt="" (click)="cerrar()">
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-3">
+        <div class="card flex justify-content-center">
+          <p-menu [model]="items"></p-menu>
+      </div>
+      </div>
+      <div class="col-9">
+
+      </div>
+    </div>
+</div>
+
+
+<div class="body-login" style="width: 100%; height: 800px;" *ngIf="!this.inicioSesion">
+  <div class="container-login">
+    <p-card>
+      <p-header>
+        <h1 style="text-align: center;">ADViajes</h1>
+      </p-header>
+
+      <form>
+        <div class="mb-3">
+          <tr>
+            <td style="width: 95px;"><label for="username">Correo</label></td>
+            <td><input id="username" type="text" pInputText placeholder="Ingrese su correo" [(ngModel)]="this.usuario" name="username" /></td>
+          </tr>
+        </div>
+
+        <div class="mb-3">
+          <tr>
+            <td style="width: 95px;"><label for="password">Contraseña</label></td>
+            <td><input id="password" type="password" pInputText placeholder="Ingrese su contraseña" [(ngModel)]="this.password" name="password" /></td>
+          </tr>
+        </div>
+
+        <div style="align-items: center;display: block;">
+          <p-button type="submit" label="Iniciar sesión" (click)="validaLogin()" ></p-button>
+        </div>
+      </form>
+    </p-card>
+  </div>
+</div>
+
+
+
+<router-outlet></router-outlet>
