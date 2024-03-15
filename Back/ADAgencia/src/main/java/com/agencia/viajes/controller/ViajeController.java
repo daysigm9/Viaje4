@@ -3,6 +3,7 @@ package com.agencia.viajes.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agencia.viajes.common.MessageResponse;
+import com.agencia.viajes.dto.ViajeConsultaDTO;
 import com.agencia.viajes.dto.ViajeDTO;
+import com.agencia.viajes.dto.ViajeReporte;
 import com.agencia.viajes.service.ViajeService;
 
 @RestController
@@ -48,5 +51,12 @@ public class ViajeController {
         viajeDTO.setViajeId(id);
         return viajeService.actualizar(viajeDTO);
     }
+    
+    @GetMapping("/reporte")
+    public MessageResponse<List<ViajeConsultaDTO>> findReportViajes() {
+        MessageResponse<List<ViajeConsultaDTO>> message = viajeService.findReportViajes();
+        return message;
+    }
+    
 }
 

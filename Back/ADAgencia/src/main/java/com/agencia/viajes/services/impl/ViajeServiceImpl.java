@@ -2,13 +2,16 @@ package com.agencia.viajes.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.agencia.viajes.common.MessageResponse;
+import com.agencia.viajes.dto.ViajeConsultaDTO;
 import com.agencia.viajes.dto.ViajeDTO;
+import com.agencia.viajes.dto.ViajeReporte;
 import com.agencia.viajes.models.Viaje;
 import com.agencia.viajes.repositories.ViajeRepository;
 import com.agencia.viajes.service.ViajeService;
@@ -94,4 +97,24 @@ public class ViajeServiceImpl implements ViajeService {
         }
         return message;
     }
-}
+    
+    @Override
+    public MessageResponse<List<ViajeConsultaDTO>> findReportViajes() {
+        MessageResponse message = new MessageResponse<>();
+        List<Map<String, Object>> resultList = viajeRepository.getDataAsMap();
+        List<ViajeConsultaDTO> viajeConsulta = new ArrayList<>();
+        for (Map<String, Object> result : resultList) {
+        	ViajeConsultaDTO viajeReporte = new ViajeConsultaDTO();
+            viajeReporte.setIdViaje((Integer) result.get("idViaje"));
+            viajeReporte.setOrigen((String)result.get("Origen"));
+            viajeReporte.setOrigen((String)result.get("Destino"));
+            //viajeReporte.setImporte((Double)result.get("Importe"));
+            //viajeReporte.setFechaSalida((String) result.get("FechaSalida"));
+            viajeReporte.setImporte(100d);
+            viajeReporte.setFechaSalida("01-01-2024 10:20");
+            viajeReporte.setPasajeros((Integer) result.get("Pasajeros"));
+            viajeConsulta.add(viajeReporte);
+        }
+        message.setResult(viajeConsulta);
+        return message;
+    }}
