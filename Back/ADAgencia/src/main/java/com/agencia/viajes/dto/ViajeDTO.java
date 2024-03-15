@@ -16,5 +16,6 @@ public class ViajeDTO {
     private Double precio;
     private Integer usuarioId;
     private Integer autobusId;
+    private Integer idRuta;
 
 }

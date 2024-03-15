@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 public class EscalaDTO {
 
     private Integer escalaId;
+	private Integer idRuta;
+	private Integer subEscala;
     private String origen;
     private String destino;
     private Double precio;
-    private Integer viajeId;
 
 }

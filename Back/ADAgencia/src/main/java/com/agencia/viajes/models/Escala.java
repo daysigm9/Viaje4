@@ -5,9 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,17 +23,19 @@ public class Escala {
     @Column(name = "escalaid")
     private Integer escalaId;
 
-    @Column(name = "origen", nullable = false, length = 50)
+	@Column(name = "idruta")
+    private Integer idRuta;
+
+	@Column(name = "subescala")
+    private Integer subEscala;
+
+    @Column(name = "Origen", nullable = false, length = 50)
     private String origen;
 
-    @Column(name = "destino", nullable = false, length = 50)
+    @Column(name = "Destino", nullable = false, length = 50)
     private String destino;
 
-    @Column(name = "precio", nullable = false)
+    @Column(name = "Precio", nullable = false)
     private Double precio;
-
-    @ManyToOne
-    @JoinColumn(name = "viajeid", nullable = false)
-    private Viaje viaje;
 
 }

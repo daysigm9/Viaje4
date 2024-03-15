@@ -15,6 +15,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "Viaje")
 @Data
@@ -28,7 +41,7 @@ public class Viaje {
     private Integer viajeId;
 
     @Column(name = "fechahora", nullable = false)
-    private LocalDateTime fechaHora;
+    private java.time.LocalDateTime fechaHora;
 
     @Column(name = "Precio", nullable = false)
     private Double precio;
@@ -37,8 +50,10 @@ public class Viaje {
     @JoinColumn(name = "usuarioid", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "autobusid", nullable = false)
-    private Autobus autobus;
+    @Column(name = "autobusid", nullable = false)
+    private Integer autobusId;
+
+    @Column(name = "idruta", nullable = false)
+    private Integer idRuta;
 
 }
