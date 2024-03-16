@@ -14,7 +14,9 @@ import com.agencia.viajes.models.Viaje;
 
 @Repository
 public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
-    @Query(value="SELECT " +
+
+	
+	@Query(value="SELECT " +
             "V.ViajeId AS idViaje, " +
        	    "E.Origen as origen, " + 
     	    "E.Destino as destino, " + 
@@ -29,5 +31,20 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
             "Reserva R ON V.ViajeId = R.ViajeId " +
             "GROUP BY " +
             "V.ViajeId, E.Origen, E.Destino, V.Precio, V.FechaHora", nativeQuery=true)
-    List<Map<String, Object>> getDataAsMap();    
+    List<Map<String, Object>> getDataAsMap();
+	
+	@Query(value="select distinct rut.Origen,rut.Destino "
+			+ "from Viaje via "
+			+ "inner join ( "
+			+ "select IdRuta,max(case when SubEscala=1 then Origen else '' end) Origen "
+			+ ",max(case when SubEscala=2 then Destino else '' end) Destino "
+			+ "from Escala "
+			+ "group by IdRuta "
+			+ ") rut "
+			+ "on rut.IdRuta=via.IdRuta "
+			+ "inner join Autobus aut "
+			+ "on aut.AutobusId=via.AutobusId "
+			+ "where FechaHora>getdate() ",nativeQuery=true)
+    List<Map<String, Object>> getOrigenDestinoAsMap();
+
 }

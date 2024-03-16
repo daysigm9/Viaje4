@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.agencia.viajes.common.MessageResponse;
+import com.agencia.viajes.dto.OrigenDestinoDTO;
 import com.agencia.viajes.dto.ViajeConsultaDTO;
 import com.agencia.viajes.dto.ViajeDTO;
 import com.agencia.viajes.dto.ViajeReporte;
@@ -121,4 +122,20 @@ public class ViajeServiceImpl implements ViajeService {
         message.setStatus(1);
         message.setResult(viajeConsulta);
         return message;
-    }}
+    }
+
+	@Override
+	public MessageResponse<List<OrigenDestinoDTO>> findOrigenDestino() {
+        MessageResponse message = new MessageResponse<>();
+        List<Map<String, Object>> resultList = viajeRepository.getOrigenDestinoAsMap();
+        List<OrigenDestinoDTO> listaOriDest = new ArrayList<>();
+        for (Map<String, Object> result : resultList) {
+        	OrigenDestinoDTO origenDestino = new OrigenDestinoDTO();
+            origenDestino.setOrigen((String) result.get("Origen"));
+            origenDestino.setDestino((String) result.get("Destino"));
+            listaOriDest.add(origenDestino);
+        }
+        message.setStatus(1);
+        message.setResult(listaOriDest);
+        return message;
+	}}
