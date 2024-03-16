@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FechaUtils } from 'src/app/Utils/fecha-utils';
+import { DatoViaje } from 'src/app/models/dato-viaje';
 import { OrigenDestino } from 'src/app/models/origen-destino';
 import { SelectFecha } from 'src/app/models/select-fecha';
 import { ViajesService } from 'src/app/services/viajes.service';
@@ -25,6 +26,11 @@ export class ReservaIntermediaComponent implements OnInit {
   origenSeleccionado:string="";
   destinoSeleccionado:string="";
 
+  datosViaje:DatoViaje[]=[];
+  datoViajeSeleccionado:DatoViaje=new DatoViaje();
+
+  activaTabla:boolean=false;
+
   constructor(private viajesService:ViajesService) {
 
   }
@@ -40,6 +46,7 @@ export class ReservaIntermediaComponent implements OnInit {
         if(this.origenes.length){
           this.origenSeleccionado=this.origenes[0];
           this.destinos=this.origenDestino.filter(f=>f.origen==this.origenSeleccionado).map(m=>m.destino);
+          this.destinoSeleccionado=this.destinos[0];
         }else{
           this.destinos=[];
           this.origenSeleccionado="";
@@ -60,7 +67,17 @@ export class ReservaIntermediaComponent implements OnInit {
   }
 
   cargarDatosViajes(){
+    this.viajesService.obtenerDatosViajeIntermedio(this.origenSeleccionado,this.destinoSeleccionado,this.fechaSeleccionada).subscribe(resp=>{
+      if(resp.status==1){
+        this.datosViaje=resp.result;
+        this.activaTabla=true;
+      }
+    });
+  }
 
+  viajeSeleccionado(datoViaje:DatoViaje){
+     alert(datoViaje);
+     this.activaTabla=false;
   }
 
 

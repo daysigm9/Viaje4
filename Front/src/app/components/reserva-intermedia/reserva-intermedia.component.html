@@ -29,5 +29,27 @@
   <button class="btn" style="margin: 0 auto;" (click)="cargarDatosViajes()">Enviar</button>
 
 
+  <table style="margin-top: 30px;" *ngIf="this.activaTabla">
+    <tr>
+      <th>Id Viaje</th>
+      <th>Fecha Hora Salida</th>
+      <th>Numero Autobus</th>
+      <th>Origen</th>
+      <th>Destino</th>
+      <th>AsientosLibres</th>
+      <th>Acción</th>
+    </tr>
+    <tr *ngFor="let dato of this.datosViaje">
+      <td>{{ dato.viajeId }}</td>
+      <td>{{ dato.fechaHoraSalida|date:"dd-MM-yyyy" }}</td>
+      <td>{{ dato.numeroAutobus }}</td>
+      <td>{{ dato.origen }}</td>
+      <td>{{ dato.destino }}</td>
+      <td>{{ dato.asientosLibre }}</td>
+      <td><i class="pi pi-check-circle" style="font-size: 2rem; color: #4CAF50;" (click)="viajeSeleccionado(dato)"></i></td>
+    </tr>
+  </table>
+
+
 
 </div>
