@@ -118,6 +118,7 @@ public class ViajeServiceImpl implements ViajeService {
             viajeReporte.setPasajeros((Integer) result.get("Pasajeros"));
             viajeConsulta.add(viajeReporte);
         }
+        message.setStatus(1);
         message.setResult(viajeConsulta);
         return message;
     }}

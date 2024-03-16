@@ -25,28 +25,35 @@ export class AppComponent implements OnInit {
       {
         label: 'Reservar',
         icon: 'pi pi-fw pi-plus',
+        routerLink:'reserva'
     },
     {
       label: 'Reservar Intermedio',
       icon: 'pi pi-fw pi-plus',
+      routerLink:'reserva-intermedia'
   },
     {
       label: 'Importar Pasajeros',
-      icon: 'pi pi-fw pi-trash'
+      icon: 'pi pi-fw pi-trash',
+      routerLink:''
   },
   {
           label: 'Reporte de Viajes',
-          icon: 'pi pi-fw pi-trash'
-      }
+          icon: 'pi pi-fw pi-trash',
+          routerLink:'reporte'
+        }
       ,
       {
               label: 'Grafica de Destinos',
-              icon: 'pi pi-fw pi-trash'
+              icon: 'pi pi-fw pi-trash',
+              routerLink:'grafica'
+
           }
           ,
           {
                   label: 'Exportar datos pasajeros',
-                  icon: 'pi pi-fw pi-trash'
+                  icon: 'pi pi-fw pi-trash',
+                  routerLink:'genera-pdf'
           }
         ];
     let item:string|null=localStorage.getItem("usuario");

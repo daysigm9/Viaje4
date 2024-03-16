@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Tabla de viajes </title>
+</head>
+<body>
+
+<div class="container">
+    <h2>Reporte de viajes</h2>
+
+    <table *ngIf="consultasReporte && consultasReporte.length > 0">
+      <tr>
+        <th>Viaje</th>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>Importe</th>
+        <th>Fecha salida</th>
+        <th>Pasajeros</th>
+      </tr>
+      <tr *ngFor="let consulta of consultasReporte">
+        <td>{{ consulta.idViaje }}</td>
+        <td>{{ consulta.origen }}</td>
+        <td>{{ consulta.destino }}</td>
+        <td>{{ consulta.importe }}</td>
+        <td>{{ consulta.fechaSalida }}</td>
+        <td>{{ consulta.pasajeros }}</td>
+      </tr>
+    </table>
+
+    <div *ngIf="!(consultasReporte && consultasReporte.length > 0)">
+        <p>No hay datos disponibles.</p>
+    </div>
+</div>
+
+</body>
+</html>

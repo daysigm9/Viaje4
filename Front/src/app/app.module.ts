@@ -12,12 +12,24 @@ import {InputTextModule} from 'primeng/inputtext';
 import {InputMaskModule} from 'primeng/inputmask';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from 'primeng/menu';
+import { HomeComponent } from './components/home/home.component';
+import { ReservaComponent } from './components/reserva/reserva.component';
+import { ReservaIntermediaComponent } from './components/reserva-intermedia/reserva-intermedia.component';
+import { ReporteComponent } from './components/reporte/reporte.component';
+import { GraficaComponent } from './components/grafica/grafica.component';
+import { GeneraPdfComponent } from './components/genera-pdf/genera-pdf.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    ReservaComponent,
+    ReservaIntermediaComponent,
+    ReporteComponent,
+    GraficaComponent,
+    GeneraPdfComponent
   ],
   imports: [
     BrowserModule,
