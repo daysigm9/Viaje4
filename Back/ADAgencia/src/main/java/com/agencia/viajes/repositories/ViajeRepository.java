@@ -85,8 +85,16 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 	@Query(value="select Asiento from Reserva res inner join ReservaAsiento resa"
 			+" on res.ReservaId=resa.ReservaId where res.ViajeId=?1",nativeQuery=true)
 	List<Integer> getAsientosOcupados(int viajeId);
+	
+	
+	@Query(value=" select distinct rut.Origen,rut.Destino "+
+			" from Viaje via "+
+			" inner join Escala rut "+
+			" on rut.IdRuta=via.IdRuta "+
+			" inner join Autobus aut "+
+			" on aut.AutobusId=via.AutobusId "
+,nativeQuery=true)
+    List<Map<String, Object>> getOrigenDestinoIntAsMap();
 
-	
-	
 	
 }

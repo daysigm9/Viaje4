@@ -69,6 +69,12 @@ public class ViajeController {
         return message;
     }
 
+    @GetMapping("/obtenerOrigenDestiInt")
+    public MessageResponse<List<OrigenDestinoDTO>> obtenerOrigenDestiInt() {
+        MessageResponse<List<OrigenDestinoDTO>> message = viajeService.findOrigenDestinoInt();
+        return message;
+    }
+
     @GetMapping("/obtenerDatosViajes/{origen}/{destino}/{fecha}")
     public MessageResponse<List<DatosViajesDTO>> obtenerDatosViajes(@PathVariable String origen, @PathVariable String destino, @PathVariable String fecha) {
         MessageResponse<List<DatosViajesDTO>> message = viajeService.findDatosViajes(origen, destino,fecha);

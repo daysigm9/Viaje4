@@ -189,6 +189,24 @@ public class ViajeServiceImpl implements ViajeService {
 		return message;
 	}
 	
+	@Override
+	public MessageResponse<List<OrigenDestinoDTO>> findOrigenDestinoInt() {
+		MessageResponse message = new MessageResponse<>();
+		List<Map<String, Object>> resultList = viajeRepository.getOrigenDestinoIntAsMap();
+		List<OrigenDestinoDTO> listaOriDest = new ArrayList<>();
+		for (Map<String, Object> result : resultList) {
+			OrigenDestinoDTO origenDestino = new OrigenDestinoDTO();
+			origenDestino.setOrigen((String) result.get("Origen"));
+			origenDestino.setDestino((String) result.get("Destino"));
+			listaOriDest.add(origenDestino);
+		}
+		message.setStatus(1);
+		message.setResult(listaOriDest);
+		return message;
+	}
+
+
+	
 	
 
 }
