@@ -5,6 +5,7 @@ import { MessageResponse } from '../models/message-response';
 import { Observable } from 'rxjs';
 import { ConsultaReserva } from '../models/consulta-reserva';
 import { OrigenDestino } from '../models/origen-destino';
+import { DatoViaje } from '../models/dato-viaje';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,15 @@ export class ViajesService {
   obtenerDestinos():Observable<MessageResponse<OrigenDestino[]>>{
     return this.httpClient.get<MessageResponse<OrigenDestino[]>>(this.url+this.servicio+'/obtenerOrigenDesti');
   }
+
+  obtenerDatosViaje(origen:string,destino:string,fecha:string):Observable<MessageResponse<DatoViaje[]>>{
+    return this.httpClient.get<MessageResponse<DatoViaje[]>>(this.url+this.servicio+`/obtenerDatosViajes/${origen}/${destino}/${fecha}`);
+  }
+
+  obtenerDatosViajeIntermedio(origen:string,destino:string,fecha:string):Observable<MessageResponse<DatoViaje[]>>{
+    return this.httpClient.get<MessageResponse<DatoViaje[]>>(this.url+this.servicio+`/obtenerDatosViajesInt/${origen}/${destino}/${fecha}`);
+  }
+
+
 
 }

@@ -59,5 +59,9 @@ export class ReservaIntermediaComponent implements OnInit {
     this.destinoSeleccionado=event.value;
   }
 
+  cargarDatosViajes(){
+
+  }
+
 
 }
