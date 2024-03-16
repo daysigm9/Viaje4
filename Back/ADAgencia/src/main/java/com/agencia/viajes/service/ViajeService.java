@@ -29,6 +29,7 @@ public interface ViajeService {
     MessageResponse<List<Integer>> findAsientosOcupados(Integer viajeId);
     
     MessageResponse<List<OrigenDestinoDTO>> findOrigenDestinoInt();
+    MessageResponse<List<DatosViajesDTO>> findDatosViajesInt(String origen,String destino,String fecha);
 
 
 }

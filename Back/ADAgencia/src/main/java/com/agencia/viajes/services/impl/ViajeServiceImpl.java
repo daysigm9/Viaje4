@@ -204,6 +204,31 @@ public class ViajeServiceImpl implements ViajeService {
 		message.setResult(listaOriDest);
 		return message;
 	}
+	
+	
+	@Override
+	public MessageResponse<List<DatosViajesDTO>> findDatosViajesInt(String origen, String destino, String fecha) {
+		MessageResponse message = new MessageResponse<>();
+		List<Map<String, Object>> resultList = viajeRepository.getDatosViajesIntAsMap(origen, destino, fecha);
+		List<DatosViajesDTO> listaDatos = new ArrayList<>();
+		for (Map<String, Object> result : resultList) {
+			DatosViajesDTO datosViaje = new DatosViajesDTO();
+			datosViaje.setViajeId((Integer) result.get("ViajeId"));
+			datosViaje.setFechaHoraSalida(((Timestamp) result.get("FechaHoraSalida")).toLocalDateTime());
+			datosViaje.setNumeroAutobus((Integer) result.get("NumeroAutobus"));
+			datosViaje.setOrigen((String) result.get("Origen"));
+			datosViaje.setDestino((String) result.get("Destino"));
+			datosViaje.setIdRuta((Integer) result.get("IdRuta"));
+			datosViaje.setAsientosLibre((Integer) result.get("AsientosLibre"));
+			datosViaje.setCantidadAsientos((Integer) result.get("CantidadAsientos"));
+			datosViaje.setPrecio(((BigDecimal) result.get("Precio")).doubleValue());
+			listaDatos.add(datosViaje);
+		}
+		message.setStatus(1);
+		message.setResult(listaDatos);
+		return message;
+	}
+
 
 
 	

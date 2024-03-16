@@ -92,6 +92,14 @@ public class ViajeController {
         MessageResponse<List<Integer>> message = viajeService.findAsientosOcupados(viajeId);
         return message;
     }
+    
+    @GetMapping("/obtenerDatosViajesInt/{origen}/{destino}/{fecha}")
+    public MessageResponse<List<DatosViajesDTO>> obtenerDatosViajesInt(@PathVariable String origen, @PathVariable String destino, @PathVariable String fecha) {
+        MessageResponse<List<DatosViajesDTO>> message = viajeService.findDatosViajesInt(origen, destino,fecha);
+        return message;
+    }
+    
+
 
     
 }
