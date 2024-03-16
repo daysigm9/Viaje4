@@ -47,4 +47,28 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 			+ "where FechaHora>getdate() ",nativeQuery=true)
     List<Map<String, Object>> getOrigenDestinoAsMap();
 
+	@Query(value="SELECT via.ViajeId, via.FechaHora AS FechaHoraSalida, via.AutobusId AS NumeroAutobus, " +
+            "rut.Origen, rut.Destino, rut.IdRuta, aut.CantidadAsientos - ISNULL(aso.AsientosOcupados, 0) AS AsientosLibre, " +
+            "via.Precio " +
+            "FROM Viaje via " +
+            "INNER JOIN ( " +
+            "   SELECT IdRuta, " +
+            "       MAX(CASE WHEN SubEscala = 1 THEN Origen ELSE '' END) AS Origen, " +
+            "       MAX(CASE WHEN SubEscala = 2 THEN Destino ELSE '' END) AS Destino " +
+            "   FROM Escala " +
+            "   GROUP BY IdRuta " +
+            ") rut ON rut.IdRuta = via.IdRuta " +
+            "INNER JOIN Autobus aut ON aut.AutobusId = via.AutobusId " +
+            "LEFT JOIN ( " +
+            "   SELECT ViajeId, COUNT(*) AS AsientosOcupados " +
+            "   FROM Reserva res " +
+            "   INNER JOIN ReservaAsiento resa ON res.ReservaId = resa.ReservaId " +
+            "   GROUP BY ViajeId " +
+            ") aso ON aso.ViajeId = via.ViajeId " +
+            "WHERE FechaHora > GETDATE() AND Origen = ?1 AND Destino = ?2 and cast(FechaHora as Date)=?3", nativeQuery = true)
+     List<Map<String, Object>> getDatosViajesAsMap(String origen,String destino,String Fecha);
+	
+	
+	
+	
 }

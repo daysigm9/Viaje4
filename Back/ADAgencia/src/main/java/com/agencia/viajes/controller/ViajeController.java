@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agencia.viajes.common.MessageResponse;
+import com.agencia.viajes.dto.DatosViajesDTO;
 import com.agencia.viajes.dto.OrigenDestinoDTO;
 import com.agencia.viajes.dto.ViajeConsultaDTO;
 import com.agencia.viajes.dto.ViajeDTO;
@@ -64,6 +65,12 @@ public class ViajeController {
     @GetMapping("/obtenerOrigenDesti")
     public MessageResponse<List<OrigenDestinoDTO>> obtenerOrigenDesti() {
         MessageResponse<List<OrigenDestinoDTO>> message = viajeService.findOrigenDestino();
+        return message;
+    }
+
+    @GetMapping("/obtenerDatosViajes/{origen}/{destino}/{fecha}")
+    public MessageResponse<List<DatosViajesDTO>> obtenerDatosViajes(@PathVariable String origen, @PathVariable String destino, @PathVariable String fecha) {
+        MessageResponse<List<DatosViajesDTO>> message = viajeService.findDatosViajes(origen, destino,fecha);
         return message;
     }
     
