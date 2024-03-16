@@ -19,7 +19,7 @@
 
   <div class="column">
     <label for="combo3">FECHA:</label>
-    <select id="combo3">
+    <select id="combo3" [(ngModel)]="fechaSeleccionada">
       <ng-container *ngFor="let fecha of this.fechasSelect">
         <option [value]="fecha.fechaValue">{{fecha.fecha}}</option>
       </ng-container>

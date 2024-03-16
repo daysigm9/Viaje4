@@ -13,6 +13,9 @@ import { SelectFecha } from 'src/app/models/select-fecha';
 export class ReservaIntermediaComponent implements OnInit {
   fechasIniciales:string[]=[];
   fechasSelect:SelectFecha[]=[];
+  fechaSeleccionada:string="";
+  origenSeleccionado:string="";
+  destinoSeleccionado:string="";
 
   ngOnInit(): void {
     this.fechasIniciales=FechaUtils.getDatesArray();

@@ -27,11 +27,11 @@ export class ViajesService {
   }
 
   obtenerDestinoIntermedios():Observable<MessageResponse<OrigenDestino[]>>{
-    return this.httpClient.get<MessageResponse<ConsultaReserva[]>>(this.url+this.servicio+'/obtenerOrigenDestiInt');
+    return this.httpClient.get<MessageResponse<OrigenDestino[]>>(this.url+this.servicio+'/obtenerOrigenDestiInt');
   }
 
   obtenerDestinos():Observable<MessageResponse<OrigenDestino[]>>{
-    return this.httpClient.get<MessageResponse<ConsultaReserva[]>>(this.url+this.servicio+'/obtenerOrigenDesti');
+    return this.httpClient.get<MessageResponse<OrigenDestino[]>>(this.url+this.servicio+'/obtenerOrigenDesti');
   }
 
 }
