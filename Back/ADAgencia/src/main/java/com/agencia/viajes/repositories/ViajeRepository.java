@@ -99,7 +99,7 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 	
 	@Query(value=
 			" select via.ViajeId, via.FechaHora FechaHoraSalida,via.AutobusId NumeroAutobus "+
-			" ,rut.Origen,rut.Destino,rut.IdRuta,aut.CantidadAsientos-isnull(aso.AsientosOcupados,0) AsientosLibre,rut.Precio "+
+			" ,rut.Origen,rut.Destino,rut.IdRuta,aut.CantidadAsientos-isnull(aso.AsientosOcupados,0) AsientosLibre,rut.Precio,aut.CantidadAsientos "+
 			" from Viaje via  "+
 			" inner join Escala rut "+
 			" on rut.IdRuta=via.IdRuta "+

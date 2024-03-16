@@ -86,3 +86,15 @@ tr:nth-child(even) {
 tr:hover {
     background-color: #ddd;
 }
+
+
+input[type="text"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  width: 200px;
+}

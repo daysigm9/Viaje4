@@ -1,35 +1,84 @@
 <div class="container">
   <div class="column">
     <label for="combo1">ORIGEN:</label>
-    <select id="combo1" (change)="cambio($event.target)" [(ngModel)]="this.origenSeleccionado" [disabled]="this.origenDesabilitada" >
+    <select
+      id="combo1"
+      (change)="cambio($event.target)"
+      [(ngModel)]="this.origenSeleccionado"
+      [disabled]="this.origenDesabilitada"
+    >
       <ng-container *ngFor="let origen of this.origenes">
-        <option [value]="origen">{{origen}}</option>
+        <option [value]="origen">{{ origen }}</option>
       </ng-container>
     </select>
   </div>
 
   <div class="column">
     <label for="combo2">DESTINO:</label>
-    <select id="combo2" (change)="cambioDestino($event.target)" [(ngModel)]="this.destinoSeleccionado" [disabled]="this.destinoDesabilitada">
+    <select
+      id="combo2"
+      (change)="cambioDestino($event.target)"
+      [(ngModel)]="this.destinoSeleccionado"
+      [disabled]="this.destinoDesabilitada"
+    >
       <ng-container *ngFor="let destino of this.destinos">
-        <option [value]="destino">{{destino}}</option>
+        <option [value]="destino">{{ destino }}</option>
       </ng-container>
     </select>
   </div>
 
   <div class="column">
     <label for="combo3">FECHA:</label>
-    <select id="combo3" [(ngModel)]="fechaSeleccionada" [disabled]="this.fechaDesabilitada">
+    <select
+      id="combo3"
+      [(ngModel)]="fechaSeleccionada"
+      [disabled]="this.fechaDesabilitada"
+    >
       <ng-container *ngFor="let fecha of this.fechasSelect">
-        <option [value]="fecha.fechaValue">{{fecha.fecha}}</option>
+        <option [value]="fecha.fechaValue">{{ fecha.fecha }}</option>
       </ng-container>
     </select>
   </div>
 
-  <button class="btn" style="margin: 0 auto;" (click)="cargarDatosViajes()" *ngIf="!this.botonDesabilitado" >Enviar</button>
+  <button
+    class="btn"
+    style="margin: 0 auto"
+    (click)="cargarDatosViajes()"
+    *ngIf="!this.botonDesabilitado"
+  >
+    Enviar
+  </button>
+</div>
 
+<table style="margin-top: 30px" *ngIf="this.activaTabla">
+  <tr>
+    <th>Id Viaje</th>
+    <th>Fecha Hora Salida</th>
+    <th>Numero Autobus</th>
+    <th>Origen</th>
+    <th>Destino</th>
+    <th>AsientosLibres</th>
+    <th>Seleccionar</th>
+  </tr>
+  <tr *ngFor="let dato of this.datosViaje">
+    <td>{{ dato.viajeId }}</td>
+    <td>{{ dato.fechaHoraSalida | date : "dd-MM-yyyy" }}</td>
+    <td>{{ dato.numeroAutobus }}</td>
+    <td>{{ dato.origen }}</td>
+    <td>{{ dato.destino }}</td>
+    <td>{{ dato.asientosLibre }}</td>
+    <td>
+      <i
+        class="pi pi-check-circle"
+        style="font-size: 2rem; color: #4caf50"
+        (click)="viajeSeleccionado(dato)"
+      ></i>
+    </td>
+  </tr>
+</table>
 
-  <table style="margin-top: 30px;" *ngIf="this.activaTabla">
+<div>
+  <table style="margin-top: 30px" *ngIf="this.activaDetalle">
     <tr>
       <th>Id Viaje</th>
       <th>Fecha Hora Salida</th>
@@ -37,45 +86,80 @@
       <th>Origen</th>
       <th>Destino</th>
       <th>AsientosLibres</th>
-      <th>Acción</th>
     </tr>
-    <tr *ngFor="let dato of this.datosViaje">
-      <td>{{ dato.viajeId }}</td>
-      <td>{{ dato.fechaHoraSalida|date:"dd-MM-yyyy" }}</td>
-      <td>{{ dato.numeroAutobus }}</td>
-      <td>{{ dato.origen }}</td>
-      <td>{{ dato.destino }}</td>
-      <td>{{ dato.asientosLibre }}</td>
-      <td><i class="pi pi-check-circle" style="font-size: 2rem; color: #4CAF50;" (click)="viajeSeleccionado(dato)"></i></td>
+    <tr>
+      <td>{{ this.datoViajeSeleccionado.viajeId }}</td>
+      <td>
+        {{ this.datoViajeSeleccionado.fechaHoraSalida | date : "dd-MM-yyyy" }}
+      </td>
+      <td>{{ this.datoViajeSeleccionado.numeroAutobus }}</td>
+      <td>{{ this.datoViajeSeleccionado.origen }}</td>
+      <td>{{ this.datoViajeSeleccionado.destino }}</td>
+      <td>{{ this.datoViajeSeleccionado.asientosLibre }}</td>
     </tr>
   </table>
-
-  <div>
-    <table style="margin-top: 30px;" *ngIf="this.activaDetalle">
-      <tr>
-        <th>Id Viaje</th>
-        <th>Fecha Hora Salida</th>
-        <th>Numero Autobus</th>
-        <th>Origen</th>
-        <th>Destino</th>
-        <th>AsientosLibres</th>
-      </tr>
-      <tr>
-        <td>{{ this.datoViajeSeleccionado.viajeId }}</td>
-        <td>{{ this.datoViajeSeleccionado.fechaHoraSalida|date:"dd-MM-yyyy" }}</td>
-        <td>{{ this.datoViajeSeleccionado.numeroAutobus }}</td>
-        <td>{{ this.datoViajeSeleccionado.origen }}</td>
-        <td>{{ this.datoViajeSeleccionado.destino }}</td>
-        <td>{{ this.datoViajeSeleccionado.asientosLibre }}</td>
-      </tr>
-    </table>
-  </div>
-  
+</div>
 
 <div *ngIf="this.activaDetalle">
+  <div class="container">
+    <label for="precio">Cantidad:</label>
+    <select
+      id="precio"
+      [(ngModel)]="this.cantidadSeleccionada"
+      (change)="cambioCanPre()"
+      [disabled]="this.cantidadDesabilitado"
+    >
+      <ng-container *ngFor="let item of this.cantidades">
+        <option [value]="item">{{ item }}</option>
+      </ng-container>
+    </select>
+
+    <div class="column">
+      <label for="precio">Precio:</label>
+      <select
+        id="precio"
+        [(ngModel)]="this.precioSeleccionado"
+        (change)="cambioCanPre()"
+        [disabled]="this.precioDesabilitado"
+      >
+        <option [value]="this.datoViajeSeleccionado.precio">
+          {{ this.datoViajeSeleccionado.precio }}
+        </option>
+      </select>
+    </div>
+
+    <div class="column">
+      <div class="column">
+        <label for="texto">Total:</label>
+        <input
+          type="text"
+          id="texto"
+          name="texto"
+          [disabled]="true"
+          [(ngModel)]="this.total"
+          [disabled]="this.totalDesabilitado"
+        />
+      </div>
+    </div>
+
+    <button class="btn" style="margin: 0 auto" (click)="seleccionarAsientos()">
+      Seleccionar Asientos
+    </button>
+  </div>
+</div>
+
+<div *ngIf="this.activaSeleccion">
+  <div class="column">
+    <label for="combo3">Asientos:</label>
+    <p>Seleccionados {{this.catidadAsientos}}</p>
+    <ng-container *ngFor="let asiento of this.asientos">
+      <ng-container *ngIf="!this.asientosOcupados.includes(asiento)">
+        <input type="checkbox" [name]="'asiento'+asiento" [id]="'asiento'+asiento" (change)="cambioAsiento($event.target,asiento)" > Número asiento {{asiento}}<br>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <button class="btn" style="margin: 0 auto;" (click)="guardarReserva()" >Guardar Reserva</button>
 
 </div>
 
-
-
-</div>

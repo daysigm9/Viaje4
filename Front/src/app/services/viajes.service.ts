@@ -43,6 +43,10 @@ export class ViajesService {
     return this.httpClient.get<MessageResponse<DatoViaje[]>>(this.url+this.servicio+`/obtenerDatosViajesInt/${origen}/${destino}/${fecha}`);
   }
 
+  obtenerAsientos(viajeId:number):Observable<MessageResponse<number[]>>{
+    return this.httpClient.get<MessageResponse<number[]>>(this.url+this.servicio+`/obtenerAsientosOcupados/${viajeId}`);
+  }
+
 
 
 }
