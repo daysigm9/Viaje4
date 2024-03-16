@@ -1,5 +1,8 @@
 package com.agencia.viajes.services.impl;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -106,12 +109,12 @@ public class ViajeServiceImpl implements ViajeService {
         for (Map<String, Object> result : resultList) {
         	ViajeConsultaDTO viajeReporte = new ViajeConsultaDTO();
             viajeReporte.setIdViaje((Integer) result.get("idViaje"));
-            viajeReporte.setOrigen((String)result.get("Origen"));
-            viajeReporte.setOrigen((String)result.get("Destino"));
-            //viajeReporte.setImporte((Double)result.get("Importe"));
-            //viajeReporte.setFechaSalida((String) result.get("FechaSalida"));
-            viajeReporte.setImporte(100d);
-            viajeReporte.setFechaSalida("01-01-2024 10:20");
+            String str=(String)result.get("origen");
+            viajeReporte.setOrigen(str);
+            str=(String)result.get("destino");
+            viajeReporte.setDestino(str);
+            viajeReporte.setImporte(((BigDecimal)result.get("Importe")).doubleValue());
+            viajeReporte.setFechaSalida(((Timestamp) result.get("FechaSalida")).toLocalDateTime());
             viajeReporte.setPasajeros((Integer) result.get("Pasajeros"));
             viajeConsulta.add(viajeReporte);
         }

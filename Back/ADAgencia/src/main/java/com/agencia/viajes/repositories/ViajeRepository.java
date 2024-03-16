@@ -14,33 +14,10 @@ import com.agencia.viajes.models.Viaje;
 
 @Repository
 public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
-
-	
-	
-	 
-	
-	
-	
-	
-	
-    @Query(value = "SELECT " +
-            "V.ViajeId AS idViaje " +
-            "FROM " +
-            "Viaje V " +
-            "JOIN " +
-            "Escala E ON V.IdRuta = E.IdRuta " +
-            "LEFT JOIN " +
-            "Reserva R ON V.ViajeId = R.ViajeId " +
-            "GROUP BY " +
-            "V.ViajeId",
-            nativeQuery = true)
-    List<ViajeConsultaDTO> findReportViajes();
-    
-    
     @Query(value="SELECT " +
             "V.ViajeId AS idViaje, " +
-       	    "E.Origen, " + 
-    	    "E.Destino, " + 
+       	    "E.Origen as origen, " + 
+    	    "E.Destino as destino, " + 
             "V.Precio AS Importe, " +
     	    "V.FechaHora AS FechaSalida, " + 
             "COUNT(R.ReservaId) AS Pasajeros " +
