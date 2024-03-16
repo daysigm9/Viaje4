@@ -18,9 +18,13 @@ import com.agencia.viajes.common.MessageResponse;
 import com.agencia.viajes.dto.DatoGraficaDTO;
 import com.agencia.viajes.dto.DatosViajesDTO;
 import com.agencia.viajes.dto.OrigenDestinoDTO;
+import com.agencia.viajes.dto.ReservaAsientoDTO;
+import com.agencia.viajes.dto.ReservaDTO;
 import com.agencia.viajes.dto.ViajeConsultaDTO;
 import com.agencia.viajes.dto.ViajeDTO;
 import com.agencia.viajes.dto.ViajeReporte;
+import com.agencia.viajes.service.ReservaAsientoService;
+import com.agencia.viajes.service.ReservaService;
 import com.agencia.viajes.service.ViajeService;
 
 @CrossOrigin
@@ -30,6 +34,12 @@ public class ViajeController {
 
     @Autowired
     private ViajeService viajeService;
+    
+    @Autowired
+    private ReservaService reservaService;
+    
+    @Autowired
+    private ReservaAsientoService reservaAsientoService;
 
     @PostMapping
     public MessageResponse<ViajeDTO> crear(@RequestBody ViajeDTO viajeDTO) {
@@ -99,6 +109,17 @@ public class ViajeController {
         return message;
     }
     
+    @PostMapping("/crearreserva")
+    public MessageResponse<ReservaDTO> crear(@RequestBody ReservaDTO reservaDTO) {
+        return reservaService.crear(reservaDTO);
+    }
+    
+    @PostMapping("/reservaasiento")
+    public MessageResponse<ReservaAsientoDTO> crear(@RequestBody ReservaAsientoDTO reservaAsientoDTO) {
+        return reservaAsientoService.crear(reservaAsientoDTO);
+    }
+
+
 
 
     

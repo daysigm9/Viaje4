@@ -24,37 +24,37 @@ export class AppComponent implements OnInit {
     this.items = [
       {
         label: 'Reservar',
-        icon: 'pi pi-fw pi-plus',
+        icon: 'pi pi-fw pi-tag',
         routerLink:'reserva'
     },
     {
       label: 'Reservar Intermedio',
-      icon: 'pi pi-fw pi-plus',
+      icon: 'pi pi-fw pi-tags',
       routerLink:'reserva-intermedia'
   },
-    {
-      label: 'Importar Pasajeros',
-      icon: 'pi pi-fw pi-trash',
-      routerLink:''
-  },
+  //   {
+  //     label: 'Importar Pasajeros',
+  //     icon: 'pi pi-fw pi-trash',
+  //     routerLink:''
+  // },
   {
           label: 'Reporte de Viajes',
-          icon: 'pi pi-fw pi-trash',
+          icon: 'pi pi-fw pi-copy',
           routerLink:'reporte'
         }
       ,
       {
               label: 'Grafica de Destinos',
-              icon: 'pi pi-fw pi-trash',
+              icon: 'pi pi-fw pi-chart-bar',
               routerLink:'grafica'
 
           }
           ,
-          {
-                  label: 'Exportar datos pasajeros',
-                  icon: 'pi pi-fw pi-trash',
-                  routerLink:'genera-pdf'
-          }
+          // {
+          //         label: 'Exportar datos pasajeros',
+          //         icon: 'pi pi-fw pi-trash',
+          //         routerLink:'genera-pdf'
+          // }
         ];
     let item:string|null=localStorage.getItem("usuario");
     if(item!=null){

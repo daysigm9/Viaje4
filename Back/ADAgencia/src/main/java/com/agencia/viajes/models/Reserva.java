@@ -42,7 +42,7 @@ public class Reserva {
     private Double precio;
 
     @ManyToOne
-    @JoinColumn(name = "ViajeId", nullable = false)
+    @JoinColumn(name = "viajeid", nullable = false)
     private Viaje viaje;
 }
 

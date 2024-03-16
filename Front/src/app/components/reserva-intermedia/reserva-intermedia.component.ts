@@ -9,6 +9,7 @@ import { Reserva } from 'src/app/models/reserva';
 import { Usuario } from 'src/app/models/usuario';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { ReservaAsiento } from 'src/app/models/reserva-asiento';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reserva-intermedia',
@@ -63,7 +64,8 @@ export class ReservaIntermediaComponent implements OnInit {
   constructor(
     private viajesService:ViajesService,
     private messageService:MessageService,
-    private reservaService:ReservaService
+    private reservaService:ReservaService,
+    private routing:Router
     ) {
 
   }
@@ -75,7 +77,13 @@ export class ReservaIntermediaComponent implements OnInit {
     this.viajesService.obtenerDestinoIntermedios().subscribe(resp=>{
       if(resp.status==1){
         this.origenDestino=resp.result;
-        this.origenes=this.origenDestino.map(m=>m.origen);
+        let origenes:string[]=[];
+        this.origenDestino.map(m=>m.origen).forEach(f=>{
+          if(!origenes.includes(f)){
+            origenes.push(f);
+          }
+        });
+        this.origenes=origenes;
         if(this.origenes.length){
           this.origenSeleccionado=this.origenes[0];
           this.destinos=this.origenDestino.filter(f=>f.origen==this.origenSeleccionado).map(m=>m.destino);
@@ -206,15 +214,15 @@ export class ReservaIntermediaComponent implements OnInit {
     reserva.precio = this.precioSeleccionado;
     reserva.viajeId=this.datoViajeSeleccionado.viajeId;
 
-    this.reservaService.guardarReserva(reserva).subscribe(resp=>{
+    this.viajesService.guardarReserva(reserva).subscribe(resp=>{
       if(resp.status==1){
         this.asientosSeleccionados.forEach(f=>{
             let reservasAsiento:ReservaAsiento= new ReservaAsiento(resp.result.reservaId,f);
-            this.reservaService.guardarAsiento(reservasAsiento).subscribe(s=>{});
+            this.viajesService.guardarAsiento(reservasAsiento).subscribe(s=>{});
         });
 
        this.messageService.add({ severity: 'success', summary: 'Guardo', detail: 'la reserva se guardo correctamente'});
-       this.ngOnInit();
+       this.routing.navigate(['/home']);
       }
     });
 

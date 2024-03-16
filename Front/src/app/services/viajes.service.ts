@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { ConsultaReserva } from '../models/consulta-reserva';
 import { OrigenDestino } from '../models/origen-destino';
 import { DatoViaje } from '../models/dato-viaje';
+import { Reserva } from '../models/reserva';
+import { ReservaAsiento } from '../models/reserva-asiento';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +48,16 @@ export class ViajesService {
   obtenerAsientos(viajeId:number):Observable<MessageResponse<number[]>>{
     return this.httpClient.get<MessageResponse<number[]>>(this.url+this.servicio+`/obtenerAsientosOcupados/${viajeId}`);
   }
+
+
+  guardarReserva(reserva:Reserva):Observable<MessageResponse<Reserva>>{
+    return this.httpClient.post<MessageResponse<Reserva>>(this.url+this.servicio+'/crearreserva',reserva);
+  }
+
+  guardarAsiento(reservaAsiento:ReservaAsiento):Observable<MessageResponse<any>>{
+    return this.httpClient.post<MessageResponse<Reserva>>(this.url+this.servicio+"/reservaasiento",reservaAsiento);
+  }
+
 
 
 

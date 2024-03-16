@@ -29,7 +29,7 @@ export class ReservaService {
   }
 
   guardarAsiento(reservaAsiento:ReservaAsiento):Observable<MessageResponse<any>>{
-    return this.httpClient.post<MessageResponse<Reserva>>(this.url+"reservasAsientos",reservaAsiento);
+    return this.httpClient.post<MessageResponse<Reserva>>(this.url+"reservasasientos",reservaAsiento);
   }
 
 }

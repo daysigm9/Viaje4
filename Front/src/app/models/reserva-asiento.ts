@@ -3,5 +3,9 @@ export class ReservaAsiento {
   reservaId: number = 0;
   asiento: number = 0;
 
-  constructor(reservaId: number,asiento: number) {}
+  constructor(reservaId: number,asiento: number) {
+    this.reservaId=reservaId;
+    this.asiento=asiento;
+
+  }
 }
