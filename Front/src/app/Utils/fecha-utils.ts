@@ -18,7 +18,7 @@ export class FechaUtils{
   }
 
   static formatStrToStr2(dateString: string): string {
-    const parts = dateString.split('-');
+    const parts = dateString.split('/');
 
     // Verifica si la cadena tiene el formato correcto
     if (parts.length !== 3 || parts[0].length !== 2 || parts[1].length !== 2 || parts[2].length !== 4) {

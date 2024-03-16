@@ -20,9 +20,9 @@
   <div class="column">
     <label for="combo3">FECHA:</label>
     <select id="combo3">
-      <option value="opcionX">Opción X</option>
-      <option value="opcionY">Opción Y</option>
-      <option value="opcionZ">Opción Z</option>
+      <ng-container *ngFor="let fecha of this.fechasSelect">
+        <option [value]="fecha.fechaValue">{{fecha.fecha}}</option>
+      </ng-container>
     </select>
   </div>
 
