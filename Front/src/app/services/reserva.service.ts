@@ -6,19 +6,20 @@ import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
+
 })
+
 export class ViajesService {
 
   url:string="http://localhost:8091/api/";
+
   servicio:string="reserva";
 
   constructor(private httpClient:HttpClient ) { 
-    
-  }
 
+  }
   obtenerReporte():Observable<MessageResponse<ConsultaReserva[]>>{
     return this.httpClient.get<MessageResponse<ConsultaReserva[]>>(this.url+this.servicio+'/reporte');
   }
-
 
 }

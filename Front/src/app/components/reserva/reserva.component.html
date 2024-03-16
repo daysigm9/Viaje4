@@ -1,40 +1,36 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserva</title>
-</head>
-<body>
+
   <div class="container">
     <div class="column">
       <label for="combo1">ORIGEN:</label>
-      <select id="combo1">
-        <option value="opcion1">Opción 1</option>
-        <option value="opcion2">Opción 2</option>
-        <option value="opcion3">Opción 3</option>
+      <select id="combo1" (change)="cambio($event.target)" [(ngModel)]="this.origenSeleccionado" >
+        <ng-container *ngFor="let origen of this.origenes">
+          <option [value]="origen">{{origen}}</option>
+        </ng-container>
       </select>
     </div>
 
     <div class="column">
       <label for="combo2">DESTINO:</label>
-      <select id="combo2">
-        <option value="opcionA">Opción A</option>
-        <option value="opcionB">Opción B</option>
-        <option value="opcionC">Opción C</option>
+      <select id="combo2" (change)="cambioDestino($event.target)" [(ngModel)]="this.destinoSeleccionado">
+        <ng-container *ngFor="let destino of this.destinos">
+          <option [value]="destino">{{destino}}</option>
+        </ng-container>
       </select>
     </div>
 
     <div class="column">
       <label for="combo3">FECHA:</label>
-      <select id="combo3">
-        <option value="opcionX">Opción X</option>
-        <option value="opcionY">Opción Y</option>
-        <option value="opcionZ">Opción Z</option>
+      <select id="combo3" [(ngModel)]="fechaSeleccionada">
+        <ng-container *ngFor="let fecha of this.fechasSelect">
+          <option [value]="fecha.fechaValue">{{fecha.fecha}}</option>
+        </ng-container>
       </select>
     </div>
 
-    <button class="btn" style="margin: 0 auto;">Enviar</button>
+    <div class="column">
+      <label for="texto">Texto:</label>
+      <input type="text" id="texto" name="texto">
+    </div>
+
+    <button class="btn" style="margin: 0 auto;"(click)="cargarDatosViajes()">Enviar</button>
   </div>
-</body>
-</html>
