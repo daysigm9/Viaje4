@@ -1,7 +1,7 @@
 <div class="container">
   <div class="column">
     <label for="combo1">ORIGEN:</label>
-    <select id="combo1" (change)="cambio($event.target)" [(ngModel)]="this.origenSeleccionado" >
+    <select id="combo1" (change)="cambio($event.target)" [(ngModel)]="this.origenSeleccionado" [disabled]="this.origenDesabilitada" >
       <ng-container *ngFor="let origen of this.origenes">
         <option [value]="origen">{{origen}}</option>
       </ng-container>
@@ -10,7 +10,7 @@
 
   <div class="column">
     <label for="combo2">DESTINO:</label>
-    <select id="combo2" (change)="cambioDestino($event.target)" [(ngModel)]="this.destinoSeleccionado">
+    <select id="combo2" (change)="cambioDestino($event.target)" [(ngModel)]="this.destinoSeleccionado" [disabled]="this.destinoDesabilitada">
       <ng-container *ngFor="let destino of this.destinos">
         <option [value]="destino">{{destino}}</option>
       </ng-container>
@@ -19,14 +19,14 @@
 
   <div class="column">
     <label for="combo3">FECHA:</label>
-    <select id="combo3" [(ngModel)]="fechaSeleccionada">
+    <select id="combo3" [(ngModel)]="fechaSeleccionada" [disabled]="this.fechaDesabilitada">
       <ng-container *ngFor="let fecha of this.fechasSelect">
         <option [value]="fecha.fechaValue">{{fecha.fecha}}</option>
       </ng-container>
     </select>
   </div>
 
-  <button class="btn" style="margin: 0 auto;" (click)="cargarDatosViajes()">Enviar</button>
+  <button class="btn" style="margin: 0 auto;" (click)="cargarDatosViajes()" *ngIf="!this.botonDesabilitado" >Enviar</button>
 
 
   <table style="margin-top: 30px;" *ngIf="this.activaTabla">
@@ -49,6 +49,31 @@
       <td><i class="pi pi-check-circle" style="font-size: 2rem; color: #4CAF50;" (click)="viajeSeleccionado(dato)"></i></td>
     </tr>
   </table>
+
+  <div>
+    <table style="margin-top: 30px;" *ngIf="this.activaDetalle">
+      <tr>
+        <th>Id Viaje</th>
+        <th>Fecha Hora Salida</th>
+        <th>Numero Autobus</th>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>AsientosLibres</th>
+      </tr>
+      <tr>
+        <td>{{ this.datoViajeSeleccionado.viajeId }}</td>
+        <td>{{ this.datoViajeSeleccionado.fechaHoraSalida|date:"dd-MM-yyyy" }}</td>
+        <td>{{ this.datoViajeSeleccionado.numeroAutobus }}</td>
+        <td>{{ this.datoViajeSeleccionado.origen }}</td>
+        <td>{{ this.datoViajeSeleccionado.destino }}</td>
+        <td>{{ this.datoViajeSeleccionado.asientosLibre }}</td>
+      </tr>
+    </table>
+  </div>
+
+<div *ngIf="this.activaDetalle">
+
+</div>
 
 
 

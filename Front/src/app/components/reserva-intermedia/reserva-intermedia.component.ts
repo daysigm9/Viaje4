@@ -4,6 +4,7 @@ import { DatoViaje } from 'src/app/models/dato-viaje';
 import { OrigenDestino } from 'src/app/models/origen-destino';
 import { SelectFecha } from 'src/app/models/select-fecha';
 import { ViajesService } from 'src/app/services/viajes.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-reserva-intermedia',
@@ -30,8 +31,18 @@ export class ReservaIntermediaComponent implements OnInit {
   datoViajeSeleccionado:DatoViaje=new DatoViaje();
 
   activaTabla:boolean=false;
+  activaDetalle:boolean=false;
 
-  constructor(private viajesService:ViajesService) {
+  fechaDesabilitada:boolean=false;
+  origenDesabilitada:boolean=false;
+  destinoDesabilitada:boolean=false;
+
+  botonDesabilitado:boolean=false;
+
+  constructor(
+    private viajesService:ViajesService,
+    private messageService:MessageService
+    ) {
 
   }
 
@@ -67,17 +78,30 @@ export class ReservaIntermediaComponent implements OnInit {
   }
 
   cargarDatosViajes(){
+
+    if(this.fechaSeleccionada.trim().length==0){
+      this.messageService.add({ severity: 'error', summary: 'Valores incorrecto', detail: 'la fecha es un valor obligatorio' });
+      return;
+    }
+
+
+
     this.viajesService.obtenerDatosViajeIntermedio(this.origenSeleccionado,this.destinoSeleccionado,this.fechaSeleccionada).subscribe(resp=>{
       if(resp.status==1){
         this.datosViaje=resp.result;
+        this.origenDesabilitada=true;
+        this.destinoDesabilitada=true;
+        this.fechaDesabilitada=true;
+        this.botonDesabilitado=true;
         this.activaTabla=true;
       }
     });
   }
 
   viajeSeleccionado(datoViaje:DatoViaje){
-     alert(datoViaje);
+    this.datoViajeSeleccionado=datoViaje;
      this.activaTabla=false;
+     this.activaDetalle=true;
   }
 
 
