@@ -17,5 +17,6 @@ public class DatosViajesDTO {
 	private String destino;
 	private Integer idRuta;
 	private Integer AsientosLibre;
+	private Integer CantidadAsientos;
 	private Double Precio;
 }

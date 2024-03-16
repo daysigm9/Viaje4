@@ -48,7 +48,7 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
     List<Map<String, Object>> getOrigenDestinoAsMap();
 
 	@Query(value="SELECT via.ViajeId, via.FechaHora AS FechaHoraSalida, via.AutobusId AS NumeroAutobus, " +
-            "rut.Origen, rut.Destino, rut.IdRuta, aut.CantidadAsientos - ISNULL(aso.AsientosOcupados, 0) AS AsientosLibre, " +
+            "rut.Origen, rut.Destino, rut.IdRuta, aut.CantidadAsientos - ISNULL(aso.AsientosOcupados, 0) AS AsientosLibre,aut.CantidadAsientos, " +
             "via.Precio " +
             "FROM Viaje via " +
             "INNER JOIN ( " +
@@ -80,6 +80,11 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
             ") rut ON rut.IdRuta = via.IdRuta " +
             "GROUP BY rut.Origen, rut.Destino",nativeQuery=true)
     List<Map<String, Object>> getDataGraficaAsMap();
+	
+	
+	@Query(value="select Asiento from Reserva res inner join ReservaAsiento resa"
+			+" on res.ReservaId=resa.ReservaId where res.ViajeId=?1",nativeQuery=true)
+	List<Integer> getAsientosOcupados(int viajeId);
 
 	
 	

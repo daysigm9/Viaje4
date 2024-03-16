@@ -26,5 +26,6 @@ public interface ViajeService {
     MessageResponse<List<OrigenDestinoDTO>> findOrigenDestino();
     MessageResponse<List<DatosViajesDTO>> findDatosViajes(String origen,String destino,String fecha);
     MessageResponse<List<DatoGraficaDTO>> findDatosGrafica();
+    MessageResponse<List<Integer>> findAsientosOcupados(Integer viajeId);
 
 }

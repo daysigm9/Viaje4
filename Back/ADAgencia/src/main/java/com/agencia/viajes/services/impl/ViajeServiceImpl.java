@@ -156,6 +156,7 @@ public class ViajeServiceImpl implements ViajeService {
 			datosViaje.setDestino((String) result.get("Destino"));
 			datosViaje.setIdRuta((Integer) result.get("IdRuta"));
 			datosViaje.setAsientosLibre((Integer) result.get("AsientosLibre"));
+			datosViaje.setCantidadAsientos((Integer) result.get("CantidadAsientos"));
 			datosViaje.setPrecio(((BigDecimal) result.get("Precio")).doubleValue());
 			listaDatos.add(datosViaje);
 		}
@@ -179,5 +180,15 @@ public class ViajeServiceImpl implements ViajeService {
 		message.setResult(listaDatos);
 		return message;
 	}
+
+	@Override
+	public MessageResponse<List<Integer>> findAsientosOcupados(Integer viajeId) {
+		MessageResponse<List<Integer>> message= new MessageResponse<>();
+		message.setResult(viajeRepository.getAsientosOcupados(viajeId));
+		message.setStatus(1);
+		return message;
+	}
+	
+	
 
 }
