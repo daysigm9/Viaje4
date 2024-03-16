@@ -18,7 +18,7 @@ import { ReservaIntermediaComponent } from './components/reserva-intermedia/rese
 import { ReporteComponent } from './components/reporte/reporte.component';
 import { GraficaComponent } from './components/grafica/grafica.component';
 import { GeneraPdfComponent } from './components/genera-pdf/genera-pdf.component';
-
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -41,7 +41,8 @@ import { GeneraPdfComponent } from './components/genera-pdf/genera-pdf.component
     InputTextModule,
     InputMaskModule,
     HttpClientModule,
-    MenuModule
+    MenuModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
