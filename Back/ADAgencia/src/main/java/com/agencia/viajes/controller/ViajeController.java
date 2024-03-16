@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agencia.viajes.common.MessageResponse;
+import com.agencia.viajes.dto.DatoGraficaDTO;
 import com.agencia.viajes.dto.DatosViajesDTO;
 import com.agencia.viajes.dto.OrigenDestinoDTO;
 import com.agencia.viajes.dto.ViajeConsultaDTO;
@@ -73,6 +74,13 @@ public class ViajeController {
         MessageResponse<List<DatosViajesDTO>> message = viajeService.findDatosViajes(origen, destino,fecha);
         return message;
     }
+    
+    @GetMapping("/obtenerGrafica")
+    public MessageResponse<List<DatoGraficaDTO>> obtenerGrafica() {
+        MessageResponse<List<DatoGraficaDTO>> message = viajeService.findDatosGrafica();
+        return message;
+    }
+
     
 }
 

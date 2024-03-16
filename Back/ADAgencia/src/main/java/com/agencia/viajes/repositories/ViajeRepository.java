@@ -67,7 +67,20 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
             ") aso ON aso.ViajeId = via.ViajeId " +
             "WHERE FechaHora > GETDATE() AND Origen = ?1 AND Destino = ?2 and cast(FechaHora as Date)=?3", nativeQuery = true)
      List<Map<String, Object>> getDatosViajesAsMap(String origen,String destino,String Fecha);
+
 	
+	@Query(value="SELECT rut.Origen + '-' + rut.Destino AS Viaje, COUNT(*) AS Cantidad " +
+            "FROM Viaje via " +
+            "INNER JOIN ( " +
+            "    SELECT IdRuta, " +
+            "           MAX(CASE WHEN SubEscala = 1 THEN Origen ELSE '' END) AS Origen, " +
+            "           MAX(CASE WHEN SubEscala = 2 THEN Destino ELSE '' END) AS Destino " +
+            "    FROM Escala " +
+            "    GROUP BY IdRuta " +
+            ") rut ON rut.IdRuta = via.IdRuta " +
+            "GROUP BY rut.Origen, rut.Destino",nativeQuery=true)
+    List<Map<String, Object>> getDataGraficaAsMap();
+
 	
 	
 	
